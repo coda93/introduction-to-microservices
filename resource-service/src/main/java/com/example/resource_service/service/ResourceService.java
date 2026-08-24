@@ -6,6 +6,7 @@ import com.example.resource_service.exception.InvalidRequestException;
 import com.example.resource_service.exception.ResourceNotFoundException;
 import com.example.resource_service.model.ResourceEntity;
 import com.example.resource_service.repository.ResourceRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ResourceService {
 
     private static final int MAX_CSV_LENGTH = 200;
@@ -20,14 +22,6 @@ public class ResourceService {
     private final ResourceRepository resourceRepository;
     private final Mp3MetadataExtractor metadataExtractor;
     private final SongServiceClient songServiceClient;
-
-    public ResourceService(ResourceRepository resourceRepository,
-                           Mp3MetadataExtractor metadataExtractor,
-                           SongServiceClient songServiceClient) {
-        this.resourceRepository = resourceRepository;
-        this.metadataExtractor = metadataExtractor;
-        this.songServiceClient = songServiceClient;
-    }
 
     @Transactional
     public Integer upload(byte[] data) {

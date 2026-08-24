@@ -9,7 +9,7 @@ import com.example.song_service.model.Song;
 import com.example.song_service.repository.SongRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
+import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -30,7 +30,7 @@ class SongServiceTest {
     private SongRepository songRepository;
 
     // Real mapper is simple enough to use directly.
-    private final SongMapper songMapper = new SongMapper();
+    private final SongMapper songMapper = Mappers.getMapper(SongMapper.class);
 
     private SongService songService;
 

@@ -3,12 +3,13 @@ package com.example.song_service.mapper;
 import com.example.song_service.dto.SongDto;
 import com.example.song_service.model.Song;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SongMapperTest {
 
-    private final SongMapper mapper = new SongMapper();
+    private final SongMapper mapper = Mappers.getMapper(SongMapper.class);
 
     @Test
     void toEntityMapsAllFields() {

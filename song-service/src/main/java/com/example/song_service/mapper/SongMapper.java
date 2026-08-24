@@ -2,30 +2,12 @@ package com.example.song_service.mapper;
 
 import com.example.song_service.dto.SongDto;
 import com.example.song_service.model.Song;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
-public class SongMapper {
+@Mapper(componentModel = "spring")
+public interface SongMapper {
 
-    public Song toEntity(SongDto dto) {
-        return new Song(
-                dto.id(),
-                dto.name(),
-                dto.artist(),
-                dto.album(),
-                dto.duration(),
-                dto.year()
-        );
-    }
+    Song toEntity(SongDto dto);
 
-    public SongDto toDto(Song song) {
-        return new SongDto(
-                song.getId(),
-                song.getName(),
-                song.getArtist(),
-                song.getAlbum(),
-                song.getDuration(),
-                song.getYear()
-        );
-    }
+    SongDto toDto(Song song);
 }

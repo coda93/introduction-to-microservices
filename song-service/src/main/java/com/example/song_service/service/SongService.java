@@ -7,6 +7,7 @@ import com.example.song_service.exception.SongNotFoundException;
 import com.example.song_service.mapper.SongMapper;
 import com.example.song_service.model.Song;
 import com.example.song_service.repository.SongRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,17 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SongService {
 
     private static final int MAX_CSV_LENGTH = 200;
 
     private final SongRepository songRepository;
     private final SongMapper songMapper;
-
-    public SongService(SongRepository songRepository, SongMapper songMapper) {
-        this.songRepository = songRepository;
-        this.songMapper = songMapper;
-    }
 
     @Transactional
     public Integer create(SongDto dto) {

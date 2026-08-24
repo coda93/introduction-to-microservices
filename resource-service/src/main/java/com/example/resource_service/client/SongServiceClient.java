@@ -1,8 +1,7 @@
 package com.example.resource_service.client;
 
 import com.example.resource_service.dto.SongMetadataRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -12,9 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class SongServiceClient {
-
-    private static final Logger log = LoggerFactory.getLogger(SongServiceClient.class);
 
     private final RestClient restClient;
 

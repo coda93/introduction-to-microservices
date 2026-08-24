@@ -3,6 +3,7 @@ package com.example.resource_service.controller;
 import com.example.resource_service.dto.DeleteResourceResponse;
 import com.example.resource_service.dto.UploadResourceResponse;
 import com.example.resource_service.service.ResourceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,13 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/resources")
+@RequiredArgsConstructor
 public class ResourceController {
 
     private final ResourceService resourceService;
-
-    public ResourceController(ResourceService resourceService) {
-        this.resourceService = resourceService;
-    }
 
     @PostMapping(consumes = "audio/mpeg")
     public ResponseEntity<UploadResourceResponse> upload(@RequestBody byte[] body) {

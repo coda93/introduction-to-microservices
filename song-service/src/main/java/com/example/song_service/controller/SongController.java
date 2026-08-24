@@ -5,6 +5,7 @@ import com.example.song_service.dto.IdResponse;
 import com.example.song_service.dto.SongDto;
 import com.example.song_service.service.SongService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/songs")
+@RequiredArgsConstructor
 public class SongController {
 
     private final SongService songService;
-
-    public SongController(SongService songService) {
-        this.songService = songService;
-    }
 
     @PostMapping
     public ResponseEntity<IdResponse> create(@Valid @RequestBody SongDto songDto) {
