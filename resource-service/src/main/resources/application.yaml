@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8071
 
 spring:
   application:
@@ -19,4 +19,4 @@ spring:
       max-request-size: 25MB
 
 song-service:
-  base-url: http://localhost:8081
+  base-url: http://localhost:8072
