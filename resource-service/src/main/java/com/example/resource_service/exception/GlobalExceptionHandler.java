@@ -28,8 +28,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
-        String message = "Invalid value '" + ex.getValue() + "' for parameter '" + ex.getName()
-                + "'. Must be a valid integer";
+        String message = "Invalid value '" + ex.getValue() + "' for ID. Must be a positive integer";
         return build(HttpStatus.BAD_REQUEST, message);
     }
 
@@ -40,7 +39,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public ResponseEntity<ErrorResponse> handleUnsupportedMediaType(HttpMediaTypeNotSupportedException ex) {
-        return build(HttpStatus.BAD_REQUEST, "The request body is not a valid MP3 file");
+        String contentType = ex.getContentType() != null ? ex.getContentType().toString() : "unknown";
+        return build(HttpStatus.BAD_REQUEST,
+                "Invalid file format: " + contentType + ". Only MP3 files are allowed");
     }
 
     @ExceptionHandler(Exception.class)
