@@ -40,3 +40,6 @@ Thumbs.db
 
 # Tooling
 .codemie/
+
+# Environment variables (contains secrets)
+.env
