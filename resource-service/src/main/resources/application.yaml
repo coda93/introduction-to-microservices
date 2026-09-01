@@ -5,13 +5,13 @@ spring:
   application:
     name: resource-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/resource_db
-    username: resource_user
-    password: resource_password
+    url: "${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/resource_db}"
+    username: "${SPRING_DATASOURCE_USERNAME:resource_user}"
+    password: "${SPRING_DATASOURCE_PASSWORD:resource_password}"
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     open-in-view: false
   servlet:
     multipart:
@@ -19,4 +19,4 @@ spring:
       max-request-size: 25MB
 
 song-service:
-  base-url: http://localhost:8072
+  base-url: "${SONG_SERVICE_BASE_URL:http://localhost:8072}"
