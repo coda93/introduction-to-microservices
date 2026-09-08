@@ -2,7 +2,9 @@ package com.example.resource_service.client;
 
 import com.example.resource_service.dto.SongMetadataRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -16,10 +18,11 @@ public class SongServiceClient {
 
     private final RestClient restClient;
 
-    public SongServiceClient(@Value("${song-service.base-url}") String baseUrl) {
-        this.restClient = RestClient.create(baseUrl);
+    public SongServiceClient(@Qualifier("loadBalancedRestClientBuilder") RestClient.Builder loadBalancedRestClientBuilder) {
+        this.restClient = loadBalancedRestClientBuilder.baseUrl("lb://song-service").build();
     }
 
+    @Retryable(retryFor = Exception.class, maxAttempts = 5, backoff = @Backoff(delay = 2000))
     public void saveMetadata(SongMetadataRequest request) {
         restClient.post()
                 .uri("/songs")
